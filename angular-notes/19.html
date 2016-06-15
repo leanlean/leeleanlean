@@ -28,6 +28,14 @@
 
 		<!-- start -->
 		<fieldset class="example" ng-controller="example">
+
+			<legend>angular获取dom</legend>
+			<div>
+				<p>p'text</p>
+				<a class="btn btn-danger" ng-click="btnClick($event)">点击获取父级元素中P的值</a>
+				<div class="m-t20 tipsRed">父级元素中P的值为：<span ng-bind="pText"></span></div>
+			</div>
+
 			<legend>angular.element</legend>
 			<form class="form-inline">
 				addClass()
@@ -120,7 +128,12 @@
 
 <script>
 app.controller('example', function($scope){
-	
+	$scope.btnClick = function(e){
+		var ev = e.target;
+		var _this = angular.element(ev);
+		var pText = _this.parent("div").find("p").text();
+		$scope.pText = pText;
+	}
 })
 </script>
 
